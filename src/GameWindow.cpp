@@ -1,4 +1,4 @@
-#include "GameWindow.h"
+#include <GameWindow.hpp>
 #include "stdio.h"
 #include "stdlib.h"
 #include <iostream>
@@ -18,8 +18,8 @@ GameWindow::GameWindow()
 //	glfwSetKeyCallback(d->window, (GLFWkeyfun)key_callback);
     glfwMakeContextCurrent(this->window);
 //	glfwSetFramebufferSizeCallback(d->window, framebuffer_size_callback);
-//	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-//		exit(printf("Failed to initialize GLAD\n"));
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+		exit(printf("Failed to initialize GLAD\n"));
 }
 
 GameWindow::~GameWindow()

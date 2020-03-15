@@ -1,5 +1,5 @@
 #include <iostream>
-#include <GameWindow.h>
+#include <GameWindow.hpp>
 #include <unistd.h>
 
 int main() {
