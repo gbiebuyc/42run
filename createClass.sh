@@ -1,3 +1,4 @@
+#!/bin/bash
 pushd include/ >/dev/null
 echo -e "#ifndef $(echo $1 | tr a-z A-Z)_HPP
 #define $(echo $1 | tr a-z A-Z)_HPP\n
