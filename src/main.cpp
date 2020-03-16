@@ -1,8 +1,6 @@
 #include <iostream>
-#include <GameWindow.hpp>
-#include <unistd.h>
+#include <Game.hpp>
 
 int main() {
-    GameWindow mywindow;
-    sleep(1);
+    Game game;
 }

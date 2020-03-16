@@ -9,6 +9,7 @@ class GameWindow
     public:
         GameWindow();
         virtual ~GameWindow();
+        void swapBuffers();
 
     private:
         GLFWwindow	*window;

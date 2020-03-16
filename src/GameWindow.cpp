@@ -27,3 +27,7 @@ GameWindow::~GameWindow()
     glfwDestroyWindow(window);
     glfwTerminate();
 }
+
+void GameWindow::swapBuffers() {
+    glfwSwapBuffers(window);
+}
