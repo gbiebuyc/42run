@@ -11,22 +11,25 @@ else ifeq ($(UNAME), Darwin)
 endif
 .PHONY: all clean fclean re
 
-all: ./obj $(NAME)
+all: obj/ $(NAME)
 
-./obj:
-	mkdir -p ./obj
+obj/:
+	mkdir -p obj/
 
-./obj/%.o: ./src/%.cpp
+obj/%.o: src/%.cpp include/%.hpp
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-./obj/glad.o: glad/src/glad.c
+obj/glad.o: glad/src/glad.c
 	$(CXX) $(CXXFLAGS) -o $@ -c $<
 
-$(NAME): $(OBJ) ./obj/glad.o
+obj/main.o: src/main.cpp
+	$(CXX) $(CXXFLAGS) -o $@ -c $<
+
+$(NAME): $(OBJ) obj/glad.o
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
 clean:
-	rm -rf ./obj
+	rm -rf obj/
 
 fclean: clean
 	rm -rf $(NAME)
