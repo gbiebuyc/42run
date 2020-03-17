@@ -18,6 +18,7 @@ private:
     GameWindow myWindow;
     Plane ground;
     glm::mat4 projMat, viewMat;
+    double z = 3.0;
 
     void loop();
     void draw();

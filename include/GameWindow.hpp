@@ -10,9 +10,10 @@ class GameWindow
         GameWindow();
         virtual ~GameWindow();
         void swapBuffers();
+        static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-    private:
         GLFWwindow	*window;
+    private:
 
 };
 

@@ -15,7 +15,7 @@ GameWindow::GameWindow()
     if (this->window == NULL)
         exit(printf("Failed to create GLFW window\n"));
     glfwSetWindowUserPointer(this->window, this);
-//	glfwSetKeyCallback(d->window, (GLFWkeyfun)key_callback);
+	glfwSetKeyCallback(window, (GLFWkeyfun)GameWindow::key_callback);
     glfwMakeContextCurrent(this->window);
 //	glfwSetFramebufferSizeCallback(d->window, framebuffer_size_callback);
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -30,4 +30,11 @@ GameWindow::~GameWindow()
 
 void GameWindow::swapBuffers() {
     glfwSwapBuffers(window);
+}
+
+void GameWindow::key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+    (void)scancode;
+    (void)mods;
+    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+        glfwSetWindowShouldClose(window, true);
 }

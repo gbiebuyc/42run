@@ -3,15 +3,21 @@
 Game::Game() :
     projMat(glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f))
 {
-    viewMat = glm::mat4(1.0f);
-    viewMat = glm::rotate(viewMat, glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-    viewMat = glm::translate(viewMat, glm::vec3(0.0f, -1.0f, -3.0f));
     loop();
 }
 
 void Game::loop(){
-    draw();
-    sleep(1);
+    while (!glfwWindowShouldClose(myWindow.window))
+	{
+		glfwPollEvents();
+		//handle_events(d);
+        z -= 0.1;
+    viewMat = glm::mat4(1.0f);
+    viewMat = glm::rotate(viewMat, glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
+    viewMat = glm::translate(viewMat, glm::vec3(0.0f, -1.0f, -z));
+        draw();
+        usleep(100000);
+	}
 }
 
 void Game::draw() {
