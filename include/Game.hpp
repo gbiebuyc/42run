@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <Plane.hpp>
+#include <Cube.hpp>
 #include <GameWindow.hpp>
 #include <unistd.h>
 #include <GLFW/glfw3.h>
@@ -17,6 +18,7 @@ public:
 private:
     GameWindow myWindow;
     Plane ground;
+    Cube player;
     glm::mat4 projMat, viewMat;
     double z = 3.0;
 

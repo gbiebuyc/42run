@@ -3,6 +3,7 @@
 Game::Game() :
     projMat(glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f))
 {
+    glEnable(GL_DEPTH_TEST);
     loop();
 }
 
@@ -23,5 +24,6 @@ void Game::loop(){
 void Game::draw() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     ground.draw(projMat, viewMat);
+    player.draw(projMat, viewMat);
     myWindow.swapBuffers();
 }
