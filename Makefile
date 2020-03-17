@@ -5,15 +5,16 @@ UNAME = $(shell uname -s)
 CXXFLAGS = -I ./include -I ./glfw/include -I ./glad/include -Wall -Wextra -Wno-deprecated-declarations -Werror -std=gnu++14
 ifneq (, $(findstring MINGW, $(UNAME)))
 	LDFLAGS = -L ./glfw/lib-mingw -lglfw3 -lgdi32
+	NAME = 42run.exe
 else ifeq ($(UNAME), Darwin)
 	# https://www.glfw.org/docs/3.0/build.html#build_link_osx
 	LDFLAGS = -L ./glfw/lib-macos -lglfw3 -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 endif
 .PHONY: all clean fclean re
 
-all: obj/ $(NAME)
+all: obj $(NAME)
 
-obj/:
+obj:
 	mkdir -p obj/
 
 obj/%.o: src/%.cpp include/%.hpp

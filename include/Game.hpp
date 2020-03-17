@@ -2,7 +2,6 @@
 #define GAME_HPP
 
 #include <iostream>
-#include <Plane.hpp>
 #include <Cube.hpp>
 #include <GameWindow.hpp>
 #include <unistd.h>
