@@ -26,6 +26,7 @@ private:
 
     void loop();
     void draw();
+    void handleEvents();
 
 };
 

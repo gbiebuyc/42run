@@ -9,12 +9,13 @@ Game::Game() :
     player.setModelMat(modelMat);
 
     modelMat = glm::mat4(1.0f);
+    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -10.0f));
     modelMat = glm::scale(modelMat, glm::vec3(0.2, 0.2, 0.2));
     test.setModelMat(modelMat);
 
     modelMat = glm::mat4(1.0f);
-    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -6.0f));
-    modelMat = glm::scale(modelMat, glm::vec3(2, 0.1, 12));
+    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -10.0f));
+    modelMat = glm::scale(modelMat, glm::vec3(2, 0.1, 20));
     ground.setModelMat(modelMat);
 
     glEnable(GL_DEPTH_TEST);
@@ -25,7 +26,7 @@ void Game::loop(){
     while (!glfwWindowShouldClose(myWindow.window))
 	{
 		glfwPollEvents();
-		//handle_events(d);
+		handleEvents();
         playerPos.z -= 0.1;
         viewMat = glm::mat4(1.0f);
         viewMat = glm::rotate(viewMat, glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
@@ -48,4 +49,13 @@ void Game::draw() {
     player.draw(projMat, viewMat);
     test.draw(projMat, viewMat);
     myWindow.swapBuffers();
+}
+
+void Game::handleEvents()
+{
+    float speed = 0.03f;
+	if (glfwGetKey(myWindow.window, GLFW_KEY_LEFT) == GLFW_PRESS)
+        playerPos.x -= speed;
+	if (glfwGetKey(myWindow.window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        playerPos.x += speed;
 }
