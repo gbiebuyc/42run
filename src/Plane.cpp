@@ -10,10 +10,10 @@ Plane::Plane() :
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
     float vertices[] = {
-        0, 0, 0,
-        1, 0, 0,
+        -1, -1, 0,
+        1, -1, 0,
         1, 1, 0,
-        0, 1, 0,
+        -1, 1, 0,
     };
     glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 4 * 3, vertices, GL_STATIC_DRAW);  
 
@@ -24,7 +24,8 @@ Plane::Plane() :
     glBindVertexArray(0);
 
     modelMat = glm::mat4(1.0f);
-    //modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -3.0f));
+    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.0f, -6.0f));
+    modelMat = glm::scale(modelMat, glm::vec3(1, 1, 6));
     modelMat = glm::rotate(modelMat, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
