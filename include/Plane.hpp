@@ -16,6 +16,7 @@ public:
 private:
 	GLuint VAO, VBO, EBO;
     Shader shader;
+    glm::mat4 modelMat;
 
 };
 
