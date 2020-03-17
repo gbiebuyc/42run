@@ -1,7 +1,9 @@
 #include <Cube.hpp>
 
-Cube::Cube() :
-    shader("shaders/plaincolor.vs", "shaders/plaincolor.fs")
+Cube::Cube(std::array<float, 3> color) :
+    shader("shaders/plaincolor.vs", "shaders/plaincolor.fs"),
+    modelMat(glm::mat4(1.0f)),
+    color(color)
 {
     glGenVertexArrays(1, &VAO);
     glGenBuffers(1, &VBO);
@@ -59,11 +61,6 @@ Cube::Cube() :
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
 
     glBindVertexArray(0);
-
-    modelMat = glm::mat4(1.0f);
-    modelMat = glm::translate(modelMat, glm::vec3(0.0f, 0.5f, -6.0f));
-    modelMat = glm::scale(modelMat, glm::vec3(0.3, 0.5, 0.3));
-//    modelMat = glm::rotate(modelMat, glm::radians(-90.0f), glm::vec3(1.0f, 0.0f, 0.0f));
 }
 
 void Cube::draw(glm::mat4 projMat, glm::mat4 viewMat) {
@@ -71,8 +68,11 @@ void Cube::draw(glm::mat4 projMat, glm::mat4 viewMat) {
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projMat));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(viewMat));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
-    float color[3] = {1, 0, 0};
-    glUniform3fv(glGetUniformLocation(shader.ID, "myColor"), 1, color);
+    glUniform3fv(glGetUniformLocation(shader.ID, "myColor"), 1, &color.front());
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 36);
+}
+
+void Cube::setModelMat(glm::mat4 &modelMat) {
+    this->modelMat = modelMat;
 }

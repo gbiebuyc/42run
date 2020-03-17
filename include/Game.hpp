@@ -10,6 +10,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
+#include <array>
 
 class Game {
 public:
@@ -17,10 +18,11 @@ public:
 
 private:
     GameWindow myWindow;
-    Plane ground;
-    Cube player;
+    Cube ground{{0, 1, 0}};
+    Cube player{{0, 0, 1}};
+    Cube test{{1, 0, 1}};
     glm::mat4 projMat, viewMat;
-    double z = 3.0;
+    glm::vec3 playerPos{0, 0.5f, 0};
 
     void loop();
     void draw();
