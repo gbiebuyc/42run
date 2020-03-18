@@ -30,7 +30,7 @@ void Game::loop(){
         playerPos.z -= 0.1;
         viewMat = glm::mat4(1.0f);
         viewMat = glm::rotate(viewMat, glm::radians(10.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        viewMat = glm::translate(viewMat, glm::vec3(0.0f, -1.5f, -(playerPos.z + 3.5f)));
+        viewMat = glm::translate(viewMat, glm::vec3(0.0f, -1.5f, -(playerPos.z + 3.0f)));
 
         // Move player
         glm::mat4 modelMat = glm::mat4(1.0f);
