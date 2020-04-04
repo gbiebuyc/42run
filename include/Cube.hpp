@@ -12,7 +12,7 @@
 class Cube {
 public:
     Cube(std::array<float, 3> color);
-    void draw(glm::mat4 projMat, glm::mat4 viewMat);
+    void draw(glm::mat4 viewMat) const;
     void setModelMat(glm::mat4 &modelMat);
 
 private:

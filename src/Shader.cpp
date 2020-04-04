@@ -1,5 +1,7 @@
 #include <Shader.hpp>
 
+glm::mat4 Shader::projMat = glm::perspective(glm::radians(45.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+
 Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     // 1. retrieve the vertex/fragment source code from filePath
     std::string vertexCode;
@@ -52,6 +54,9 @@ Shader::Shader(const char* vertexPath, const char* fragmentPath) {
     // delete the shaders as they're linked into our program now and no longer necessary
     glDeleteShader(vertex);
     glDeleteShader(fragment);
+    // set projection matrix
+    glUseProgram(ID);
+    glUniformMatrix4fv(glGetUniformLocation(ID, "projection"), 1, GL_FALSE, glm::value_ptr(projMat));
 }
 // utility uniform functions
 // ------------------------------------------------------------------------

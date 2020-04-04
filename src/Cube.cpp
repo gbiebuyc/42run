@@ -63,9 +63,8 @@ Cube::Cube(std::array<float, 3> color) :
     glBindVertexArray(0);
 }
 
-void Cube::draw(glm::mat4 projMat, glm::mat4 viewMat) {
+void Cube::draw(glm::mat4 viewMat) const {
     glUseProgram(shader.ID);
-    glUniformMatrix4fv(glGetUniformLocation(shader.ID, "projection"), 1, GL_FALSE, glm::value_ptr(projMat));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "view"), 1, GL_FALSE, glm::value_ptr(viewMat));
     glUniformMatrix4fv(glGetUniformLocation(shader.ID, "model"), 1, GL_FALSE, glm::value_ptr(modelMat));
     glUniform3fv(glGetUniformLocation(shader.ID, "myColor"), 1, &color.front());
