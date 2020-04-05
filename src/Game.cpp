@@ -38,7 +38,7 @@ void Game::draw() {
     auto it = slices.begin();
     it->draw(viewMat);
     for (it++; it != slices.end(); it++) {
-        viewMat = glm::translate(viewMat, glm::vec3(0.0f, 0.0f, -20.0f));
+        viewMat = glm::translate(viewMat, glm::vec3(0.0f, 0.0f, -it->getLength()));
         viewMat = glm::rotate(viewMat, glm::radians(90.0f), glm::vec3(0.0f, 1.0f, 0.0f)); 
         it->draw(viewMat);
     }
