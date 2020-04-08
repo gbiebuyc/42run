@@ -14,11 +14,14 @@ Game::Game() {
 
 void Game::loop(){
     int camRotY = 0;
+    #define CAM_PLAYER_DIST 5.0f
+    float camPlayerDist = CAM_PLAYER_DIST;
     while (!glfwWindowShouldClose(myWindow.window))
     {
         glfwPollEvents();
         handleEvents();
-        playerPos.z -= 0.1;
+        #define PLAYER_SPEED 0.1f
+        playerPos.z -= PLAYER_SPEED;
         WorldSlice &currentSlice = *std::next(slices.begin());
         if (-playerPos.z >= currentSlice.getLength()) {
             camRotY = currentSlice.getDirection();
@@ -35,6 +38,7 @@ void Game::loop(){
             } else {
                 playerPos.z = 0;
             }
+            camPlayerDist -= playerPos.z;
         }
         #define ROT_SPEED 3
         if (camRotY < 0)
@@ -42,16 +46,15 @@ void Game::loop(){
         if (camRotY > 0)
             camRotY -= ROT_SPEED;
 
+        if (camPlayerDist < (CAM_PLAYER_DIST - 0.1))
+            camPlayerDist += PLAYER_SPEED;
+        if (camPlayerDist > (CAM_PLAYER_DIST + 0.1))
+            camPlayerDist -= PLAYER_SPEED;
+
         // Create view matrix
         viewMat = glm::mat4(1.0f);
-// #define VIEW_FAR
-#ifdef VIEW_FAR
-        viewMat = glm::rotate(viewMat, glm::radians(30.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        viewMat = glm::translate(viewMat, glm::vec3(0.0f, -10.0f, -(playerPos.z + 20.0f)));
-#else
         viewMat = glm::rotate(viewMat, glm::radians(12.0f), glm::vec3(1.0f, 0.0f, 0.0f));
-        viewMat = glm::translate(viewMat, glm::vec3(0.0f, -2.0f, -(playerPos.z + 5.0f)));
-#endif
+        viewMat = glm::translate(viewMat, glm::vec3(0.0f, -2.0f, -(playerPos.z + camPlayerDist)));
         viewMat = glm::rotate(viewMat, glm::radians((float)camRotY ), glm::vec3(0.0f, 1.0f, 0.0f));
 
         // Create model matrix of player
