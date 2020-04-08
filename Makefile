@@ -2,8 +2,11 @@ NAME = 42run
 SRC = $(wildcard src/*.cpp)
 OBJ = $(patsubst src/%.cpp,obj/%.o,$(SRC))
 UNAME = $(shell uname -s)
-CXXFLAGS = -I ./include -I ./glfw/include -I ./glad/include -Wall -Wextra -Wno-deprecated-declarations -Werror -std=gnu++14
-ifneq (, $(findstring MINGW, $(UNAME)))
+CXXFLAGS = -I ./include -I ./glfw/include -I ./glad/include -std=gnu++14 -Wall -Wextra -Wno-deprecated-declarations # -Werror
+ifneq (, $(findstring MINGW64, $(UNAME)))
+	LDFLAGS = -L ./glfw/lib-mingw-w64 -lglfw3 -lgdi32
+	NAME = 42run.exe
+else ifneq (, $(findstring MINGW, $(UNAME)))
 	LDFLAGS = -L ./glfw/lib-mingw -lglfw3 -lgdi32
 	NAME = 42run.exe
 else ifeq ($(UNAME), Darwin)

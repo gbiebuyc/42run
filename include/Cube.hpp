@@ -16,7 +16,7 @@ public:
     void setModelMat(glm::mat4 &modelMat);
 
 private:
-	GLuint VAO, VBO, EBO;
+    GLuint VAO, VBO, EBO;
     Shader shader;
     glm::mat4 modelMat;
     std::array<float, 3> color;

@@ -11,6 +11,8 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #include <list>
+#include <cstdlib>
+#include <ctime>
 
 class Game {
 public:
@@ -20,7 +22,8 @@ private:
     GameWindow myWindow;
     Cube player{{0, 0, 1}};
     glm::mat4 viewMat;
-    glm::vec3 playerPos{0, 0.5f, 0};
+    #define PLAYER_HEIGHT 0.5
+    glm::vec3 playerPos{0, PLAYER_HEIGHT/2, 0};
     std::list<WorldSlice> slices;
 
     void loop();

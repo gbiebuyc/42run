@@ -10,14 +10,15 @@
 
 class WorldSlice {
 public:
-	WorldSlice();
-	int getDirection() const {return direction;}
-	int getLength() const {return sliceLength;}
-	void draw(glm::mat4 modelMat) const;
+    WorldSlice();
+    int getDirection() const {return direction;}
+    int getLength() const {return sliceLength;}
+    void draw(glm::mat4 modelMat) const;
+    bool is_first;
 
 private:
-	int direction;
-	int sliceLength = 20;
+    int direction;
+    int sliceLength = 20;
     Cube ground{{0, 1, 0}};
     Cube test{{1, 0, 1}};
 
